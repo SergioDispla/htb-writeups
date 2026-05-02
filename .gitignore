@@ -7,6 +7,7 @@ Thumbs.db
 *.swo
 .idea/
 .vscode/
+CLAUDE.md
 
 # =============================================================================
 # Local-only / generated
