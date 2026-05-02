@@ -1,0 +1,68 @@
+# =============================================================================
+# OS / editor noise
+# =============================================================================
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+.idea/
+.vscode/
+
+# =============================================================================
+# Local-only / generated
+# =============================================================================
+_metadata.json
+notes-private/
+*.local.md
+
+# =============================================================================
+# HTB / VPN credentials and session artefacts (NEVER push these)
+# =============================================================================
+*.ovpn
+.htb_token
+htb-cli.conf
+
+# =============================================================================
+# Sensitive output that may end up in nmap/ or exploit/
+# =============================================================================
+# Captured network traffic — may contain credentials, cookies, tokens
+*.pcap
+*.pcapng
+*.cap
+
+# Vulnerability scanner outputs (often have findings about your own host too)
+*.nessus
+
+# Private keys, key pairs, kerberos tickets, SSH credentials
+*.pem
+*.key
+id_rsa
+id_rsa.*
+id_dsa
+id_dsa.*
+id_ecdsa
+id_ecdsa.*
+id_ed25519
+id_ed25519.*
+*.kirbi
+*.ccache
+*.keytab
+
+# Hash dumps and credential files (only the *processed* ones go in the writeup)
+hashes.txt
+ntds.dit
+SAM
+SYSTEM
+SECURITY
+*.ntds
+
+# Burp / ZAP project files (may include cookies and session data)
+*.burp
+burpsuite_*.txt
+
+# Compiled artifacts that shouldn't be committed unless intentional
+*.pyc
+__pycache__/
+.venv/
+venv/
+node_modules/
