@@ -1,0 +1,44 @@
+name: Deploy MkDocs to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - uses: actions/cache@v4
+        with:
+          key: mkdocs-material-${{ hashFiles('requirements-docs.txt') }}
+          path: ~/.cache/pip
+          restore-keys: |
+            mkdocs-material-
+
+      - run: pip install -r requirements-docs.txt
+
+      - name: Set up docs symlinks
+        run: |
+          mkdir -p docs
+          ln -sf "$(pwd)/README.md" docs/index.md
+          find . -maxdepth 1 -mindepth 1 -type d \
+            ! -name '.*' ! -name '_*' ! -name 'site' ! -name 'docs' \
+            | while read d; do
+              machine=$(basename "$d")
+              ln -sf "../$machine" "docs/$machine"
+            done
+
+      - run: mkdocs gh-deploy --force --clean --verbose
